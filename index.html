@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Letter For You</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+    background: radial-gradient(circle at top, #1a0033, #000);
+    color: white;
+    text-align: center;
+}
+
+/* Stars */
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.2; }
+    to { opacity: 1; }
+}
+
+/* Start screen */
+.start-screen {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 30px;
+    border: none;
+    background: #ff3399;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover { transform: scale(1.1); }
+
+/* Pigeon */
+.pigeon {
+    position: absolute;
+    top: 35%;
+    left: -200px;
+    font-size: 70px;
+    display: none;
+    animation: fly 5s linear forwards;
+}
+
+.pigeon span {
+    display: inline-block;
+    animation: flap 0.3s infinite alternate;
+}
+
+@keyframes flap {
+    from { transform: rotate(-10deg); }
+    to { transform: rotate(10deg); }
+}
+
+@keyframes fly {
+    to { left: 45%; }
+}
+
+/* Envelope */
+.envelope {
+    position: absolute;
+    top: 42%;
+    left: 50%;
+    font-size: 40px;
+    display: none;
+    animation: drop 1.2s ease forwards;
+}
+
+@keyframes drop {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(60px); opacity: 1; }
+}
+
+/* Letter */
+.letter {
+    display: none;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: white;
+    color: #333;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    max-width: 600px;
+    animation: openLetter 1s ease forwards;
+}
+
+@keyframes openLetter {
+    to { transform: translate(-50%, -50%) scale(1); }
+}
+
+h1 { color: #cc0066; }
+
+ul {
+    text-align: left;
+    line-height: 1.8;
+}
+
+.closing {
+    margin-top: 20px;
+    background: #fff0f8;
+    padding: 15px;
+    border-radius: 12px;
+    font-weight: bold;
+}
+
+/* Name magic */
+.name {
+    font-size: 26px;
+    color: #ff66b2;
+    opacity: 0;
+    animation: appear 2s ease forwards;
+    animation-delay: 1s;
+}
+
+@keyframes appear {
+    to { opacity: 1; transform: scale(1.1); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="start-screen">
+    <button onclick="deliverLetter()">A letter flew across the sky for you 💌</button>
+</div>
+
+<div class="pigeon" id="pigeon"><span>🕊️</span></div>
+<div class="envelope" id="envelope">💌</div>
+
+<div class="letter" id="letter">
+    <h1>My Promise To You</h1>
+    <div class="name">For You ❤️</div>
+
+    <p>Today I’m not just saying sweet words. I’m making real promises.</p>
+
+    <ul>
+        <li>I promise to take my career seriously and grow with focus.</li>
+        <li>I promise to handle money responsibly and build stability.</li>
+        <li>I promise to listen with maturity, not ego.</li>
+        <li>I promise to improve myself every day.</li>
+        <li>I promise to show change through actions.</li>
+        <li>I promise to be someone you feel secure with.</li>
+    </ul>
+
+    <div class="closing">
+        You care about my future because you see one with me.  
+        I promise I’m stepping into that future — properly, seriously, and with you. ❤️
+    </div>
+</div>
+
+<audio id="bgmusic" src="https://cdn.pixabay.com/audio/2022/03/15/audio_c8f6b6a6c5.mp3"></audio>
+
+<script>
+// Generate stars
+for(let i=0;i<80;i++){
+    let star=document.createElement("div");
+    star.className="star";
+    star.style.top=Math.random()*100+"%";
+    star.style.left=Math.random()*100+"%";
+    star.style.animationDelay=Math.random()*2+"s";
+    document.body.appendChild(star);
+}
+
+function deliverLetter() {
+    document.querySelector(".start-screen").style.display = "none";
+    document.getElementById("bgmusic").play();
+
+    const pigeon = document.getElementById("pigeon");
+    pigeon.style.display = "block";
+
+    setTimeout(() => {
+        document.getElementById("envelope").style.display = "block";
+    }, 4500);
+
+    setTimeout(() => {
+        document.getElementById("letter").style.display = "block";
+    }, 6000);
+}
+</script>
+
+</body>
+</html>
